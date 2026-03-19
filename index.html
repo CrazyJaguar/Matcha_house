@@ -1,0 +1,4502 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matcha House — Craft Café & Tea Bar</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* ══════════════════════════════════════════
+   MATCHA HOUSE — Japanese-Brutalist Craft Café
+   Theme: White / Ink / Olive / Sage / Clay
+   ══════════════════════════════════════════ */
+
+    :root {
+      --ink: #0E0E0E;
+      --paper: #F5F4EF;
+      --white: #FFFFFF;
+      --olive: #6B7A3E;
+      --olive-light: #8A9A52;
+      --sage: #B8C4A0;
+      --sage-pale: #E4EAD8;
+      --clay: #C17A52;
+      --clay-pale: #EDD5C3;
+      --smoke: #EBEBEB;
+      --ash: #C8C8C0;
+      --text: #0E0E0E;
+      --text-mid: #4A4A44;
+      --text-soft: #888880;
+      --bg: #F5F4EF;
+      --surface: #FFFFFF;
+      --surface-2: #F0EFE8;
+      --border: #DDDDD5;
+      --nav-bg: rgba(245, 244, 239, 0.96);
+      --shadow-sm: 0 1px 4px rgba(14, 14, 14, 0.08);
+      --shadow: 0 4px 20px rgba(14, 14, 14, 0.10);
+      --shadow-lg: 0 12px 48px rgba(14, 14, 14, 0.14);
+      --t: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] {
+      --ink: #F0EFE8;
+      --paper: #111110;
+      --white: #1A1A18;
+      --olive: #8A9A52;
+      --olive-light: #A4B468;
+      --sage: #5A6840;
+      --sage-pale: #2A3020;
+      --clay: #D4895E;
+      --clay-pale: #3A2418;
+      --smoke: #222220;
+      --ash: #444440;
+      --text: #F0EFE8;
+      --text-mid: #B8B8B0;
+      --text-soft: #686860;
+      --bg: #111110;
+      --surface: #1A1A18;
+      --surface-2: #222220;
+      --border: #333330;
+      --nav-bg: rgba(17, 17, 16, 0.96);
+      --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.3);
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.5);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ── CUSTOM CURSOR ── */
+    .cursor {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: var(--olive);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
+      mix-blend-mode: multiply;
+    }
+
+    .cursor-ring {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid var(--olive);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.15s, width 0.2s, height 0.2s;
+      opacity: 0.5;
+    }
+
+    body:hover .cursor {
+      opacity: 1;
+    }
+
+    @media (hover: none) {
+
+      .cursor,
+      .cursor-ring {
+        display: none;
+      }
+
+      body {
+        cursor: auto;
+      }
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--smoke);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--olive);
+    }
+
+    /* ── PAGE SYSTEM ── */
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    /* ══ NAV ══ */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--nav-bg);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: var(--t);
+    }
+
+    .nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 64px;
+    }
+
+    .logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--olive);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: white;
+      font-weight: 800;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-soft);
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 8px 14px;
+      border-radius: 4px;
+      transition: var(--t);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 5px;
+      left: 14px;
+      right: 14px;
+      height: 1.5px;
+      background: var(--olive);
+      transform: scaleX(0);
+      transition: transform 0.25s;
+      transform-origin: left;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      transform: scaleX(1);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 5px 12px;
+      cursor: pointer;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      transition: var(--t);
+    }
+
+    .theme-toggle:hover {
+      background: var(--smoke);
+      color: var(--text);
+    }
+
+    .toggle-icon {
+      font-size: 0.85rem;
+    }
+
+    .nav-order {
+      background: var(--ink);
+      color: var(--paper);
+      border: none;
+      padding: 9px 20px;
+      border-radius: 4px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: var(--t);
+    }
+
+    .nav-order:hover {
+      background: var(--olive);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 8px;
+    }
+
+    .hamburger span {
+      display: block;
+      height: 2px;
+      background: var(--text);
+      transition: var(--t);
+    }
+
+    .hamburger span:nth-child(1) {
+      width: 24px;
+    }
+
+    .hamburger span:nth-child(2) {
+      width: 18px;
+    }
+
+    .hamburger span:nth-child(3) {
+      width: 24px;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: rotate(45deg) translate(4px, 4px);
+      width: 24px;
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(4px, -4px);
+      width: 24px;
+    }
+
+    /* Mobile nav */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg);
+      z-index: 999;
+      flex-direction: column;
+      padding: 40px 32px;
+      overflow-y: auto;
+    }
+
+    .mobile-nav.open {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      transition: var(--t);
+    }
+
+    .mobile-nav a span {
+      font-size: 1rem;
+      color: var(--text-soft);
+    }
+
+    .mobile-nav a:hover {
+      color: var(--olive);
+    }
+
+    /* ══ HERO ══ */
+    .hero {
+      padding-top: 64px;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      background: var(--surface);
+      padding: 80px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-right {
+      background: var(--sage-pale);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-num {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--olive);
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-num::before {
+      content: '01';
+      color: var(--ash);
+      margin-right: 4px;
+    }
+
+    .hero-title {
+      font-family: 'Lora', serif;
+      font-size: clamp(3.5rem, 6vw, 7rem);
+      line-height: 0.95;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 32px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-title .line-italic {
+      font-style: italic;
+      color: var(--olive);
+    }
+
+    .hero-desc {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+      max-width: 380px;
+      margin-bottom: 48px;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn-ink {
+      background: var(--ink);
+      color: var(--paper);
+      border: 2px solid var(--ink);
+      padding: 14px 28px;
+      border-radius: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: var(--t);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-ink:hover {
+      background: var(--olive);
+      border-color: var(--olive);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid var(--border);
+      padding: 14px 28px;
+      border-radius: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: var(--t);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--olive);
+      color: var(--olive);
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 40px;
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .hero-meta-item {}
+
+    .hero-meta-num {
+      font-family: 'Lora', serif;
+      font-size: 2.8rem;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-meta-label {
+      font-size: 0.65rem;
+      color: var(--text-soft);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* Hero Right Visual */
+    .hero-visual-content {
+      text-align: center;
+      padding: 60px 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-big-circle {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: var(--olive);
+      margin: 0 auto 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    .hero-circle-inner {
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: var(--sage-pale);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .hero-circle-text {
+      font-family: 'Lora', serif;
+      font-size: 2.5rem;
+      color: var(--olive);
+      line-height: 1;
+    }
+
+    .hero-circle-sub {
+      font-size: 0.6rem;
+      letter-spacing: 0.02em;
+      color: var(--text-soft);
+      font-weight: 700;
+      margin-top: 8px;
+    }
+
+    .hero-tag {
+      position: absolute;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 10px 16px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text);
+      box-shadow: var(--shadow);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .hero-tag-1 {
+      top: 80px;
+      left: 20px;
+      animation-delay: 0.5s;
+    }
+
+    .hero-tag-2 {
+      bottom: 100px;
+      right: 20px;
+      animation-delay: 1s;
+    }
+
+    .tag-val {
+      font-family: 'Lora', serif;
+      font-size: 1.4rem;
+      color: var(--olive);
+      font-style: italic;
+      display: block;
+      margin-top: 2px;
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 60px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .scroll-line {
+      width: 40px;
+      height: 1px;
+      background: var(--ash);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--olive);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollLine {
+      0% {
+        left: -100%;
+      }
+
+      100% {
+        left: 100%;
+      }
+    }
+
+    /* ══ MARQUEE ══ */
+    .marquee-wrap {
+      background: var(--olive);
+      overflow: hidden;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 14px 0;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      animation: marquee 20s linear infinite;
+      width: max-content;
+    }
+
+    .marquee-item {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: white;
+      padding: 0 32px;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .marquee-item::after {
+      content: '✦';
+      font-size: 0.6rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ══ SECTIONS ══ */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--olive);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 0 0 32px;
+      height: 1px;
+      background: var(--olive);
+    }
+
+    .section-title {
+      font-family: 'Lora', serif;
+      font-size: clamp(2rem, 4vw, 4rem);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--olive);
+    }
+
+    /* ══ HOME: FEATURED ══ */
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+      margin-top: 0;
+      border: 2px solid var(--ink);
+    }
+
+    .feat-card {
+      background: var(--surface);
+      padding: 40px 32px;
+      border-right: 1px solid var(--border);
+      transition: var(--t);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .feat-card:last-child {
+      border-right: none;
+    }
+
+    .feat-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--olive);
+      transform: translateY(101%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .feat-card:hover::before {
+      transform: translateY(0);
+    }
+
+    .feat-card:hover .feat-num,
+    .feat-card:hover .feat-name,
+    .feat-card:hover .feat-desc {
+      color: white;
+    }
+
+    .feat-card:hover .feat-tag {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .feat-num {
+      font-family: 'Lora', serif;
+      font-size: 4rem;
+      font-weight: 400;
+      color: var(--smoke);
+      line-height: 1;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+      transition: var(--t);
+    }
+
+    .feat-name {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+      transition: var(--t);
+    }
+
+    .feat-desc {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+      transition: var(--t);
+    }
+
+    .feat-tag {
+      display: inline-block;
+      margin-top: 20px;
+      background: var(--sage-pale);
+      color: var(--olive);
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 2px;
+      position: relative;
+      z-index: 1;
+      transition: var(--t);
+    }
+
+    /* ══ DRINKS ROW ══ */
+    .drinks-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+
+    .drink-cell {
+      border: 1px solid var(--border);
+      padding: 28px 24px;
+      transition: var(--t);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .drink-cell:hover {
+      border-color: var(--olive);
+      box-shadow: var(--shadow);
+    }
+
+    .drink-cell-num {
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: var(--ash);
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+    }
+
+    .drink-cell-emoji {
+      font-size: 2.2rem;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .drink-cell-name {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .drink-cell-desc {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      line-height: 1.5;
+    }
+
+    .drink-cell-price {
+      font-family: 'Lora', serif;
+      font-size: 1.5rem;
+      color: var(--text);
+      margin-top: 16px;
+    }
+
+    .drink-cell-add {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      background: var(--ink);
+      color: var(--paper);
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--t);
+      border-radius: 0;
+    }
+
+    .drink-cell-add:hover {
+      background: var(--olive);
+    }
+
+    /* ══ SPLIT SECTION ══ */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 500px;
+    }
+
+    .split-visual {
+      background: var(--sage-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px;
+      position: relative;
+    }
+
+    .split-content {
+      padding: 80px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .big-quote {
+      font-family: 'Lora', serif;
+      font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.4;
+      margin: 24px 0;
+      border-left: 3px solid var(--olive);
+      padding-left: 24px;
+    }
+
+    .split-content p {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    /* Geometric decoration */
+    .geo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 8px;
+      width: 280px;
+      height: 280px;
+    }
+
+    .geo-cell {
+      border-radius: 2px;
+      transition: var(--t);
+    }
+
+    .geo-cell:nth-child(1) {
+      background: var(--olive);
+    }
+
+    .geo-cell:nth-child(2) {
+      background: var(--sage);
+    }
+
+    .geo-cell:nth-child(3) {
+      background: var(--sage-pale);
+      border: 2px solid var(--sage);
+    }
+
+    .geo-cell:nth-child(4) {
+      background: var(--sage-pale);
+      border: 2px solid var(--sage);
+    }
+
+    .geo-cell:nth-child(5) {
+      background: var(--ink);
+    }
+
+    .geo-cell:nth-child(6) {
+      background: var(--olive);
+    }
+
+    .geo-cell:nth-child(7) {
+      background: var(--sage);
+    }
+
+    .geo-cell:nth-child(8) {
+      background: var(--sage-pale);
+      border: 2px solid var(--sage);
+    }
+
+    .geo-cell:nth-child(9) {
+      background: var(--clay);
+    }
+
+    /* ══ TESTIMONIALS ══ */
+    .testimonials-strip {
+      display: flex;
+      gap: 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .t-cell {
+      flex: 1;
+      padding: 40px 36px;
+      border-right: 1px solid var(--border);
+      transition: var(--t);
+    }
+
+    .t-cell:last-child {
+      border-right: none;
+    }
+
+    .t-cell:hover {
+      background: var(--sage-pale);
+    }
+
+    .t-stars {
+      color: var(--olive);
+      font-size: 0.8rem;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+
+    .t-text {
+      font-family: 'Lora', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .t-by {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+    }
+
+    /* ══ MENU PAGE ══ */
+    .menu-header {
+      padding: 120px 32px 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: end;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .menu-header-right {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 16px;
+    }
+
+    .menu-filter-row {
+      display: flex;
+      gap: 0;
+      flex-wrap: wrap;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      border-radius: 0;
+    }
+
+    .mf-btn {
+      padding: 10px 20px;
+      border: none;
+      border-right: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-soft);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: var(--t);
+      white-space: nowrap;
+    }
+
+    .mf-btn:last-child {
+      border-right: none;
+    }
+
+    .mf-btn:hover,
+    .mf-btn.active {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .menu-items-list {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .menu-category {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .menu-cat-header {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      align-items: center;
+      gap: 24px;
+      padding: 24px 32px;
+      cursor: pointer;
+      transition: var(--t);
+    }
+
+    .menu-cat-header:hover {
+      background: var(--surface-2);
+    }
+
+    .cat-num {
+      font-family: 'Lora', serif;
+      font-size: 2rem;
+      color: var(--ash);
+    }
+
+    .cat-name {
+      font-size: 1.2rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cat-toggle {
+      font-size: 1rem;
+      color: var(--text-soft);
+      transition: var(--t);
+    }
+
+    .menu-cat-body {
+      display: none;
+    }
+
+    .menu-cat-body.open {
+      display: block;
+    }
+
+    .menu-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 20px;
+      padding: 20px 32px 20px 136px;
+      border-top: 1px solid var(--border);
+      transition: var(--t);
+      cursor: pointer;
+    }
+
+    .menu-row:hover {
+      background: var(--surface-2);
+    }
+
+    .menu-row-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.02em;
+      margin-bottom: 4px;
+    }
+
+    .menu-row-desc {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      line-height: 1.4;
+    }
+
+    .menu-row-tags {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .mtag {
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
+    }
+
+    .mtag-v {
+      background: var(--sage-pale);
+      color: var(--olive);
+    }
+
+    .mtag-h {
+      background: var(--clay-pale);
+      color: var(--clay);
+    }
+
+    .mtag-n {
+      background: var(--smoke);
+      color: var(--text-soft);
+      border: 1px solid var(--border);
+    }
+
+    .menu-row-right {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .menu-row-price {
+      font-family: 'Lora', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    .menu-add {
+      width: 28px;
+      height: 28px;
+      background: transparent;
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--t);
+    }
+
+    .menu-add:hover {
+      background: var(--olive);
+      border-color: var(--olive);
+      color: white;
+    }
+
+    /* ══ ABOUT PAGE ══ */
+    .about-header {
+      padding: 120px 32px 0;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .about-hero-grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 0;
+      border: 2px solid var(--ink);
+      margin-top: 40px;
+    }
+
+    .about-hero-text {
+      padding: 60px;
+      border-right: 1px solid var(--ink);
+    }
+
+    .about-hero-text h2 {
+      font-family: 'Lora', serif;
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 28px;
+    }
+
+    .about-hero-text p {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .about-hero-aside {
+      padding: 60px;
+      background: var(--sage-pale);
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .aside-stat {}
+
+    .aside-stat-num {
+      font-family: 'Lora', serif;
+      font-size: 3.5rem;
+      font-weight: 400;
+      color: var(--olive);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .aside-stat-label {
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-soft);
+      margin-top: 4px;
+    }
+
+    .about-team {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 80px 32px;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 40px;
+      border: 1px solid var(--border);
+    }
+
+    .team-card {
+      padding: 32px 24px;
+      border-right: 1px solid var(--border);
+      transition: var(--t);
+      cursor: pointer;
+    }
+
+    .team-card:last-child {
+      border-right: none;
+    }
+
+    .team-card:hover {
+      background: var(--sage-pale);
+    }
+
+    .team-avatar {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .team-role {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--olive);
+      margin-bottom: 8px;
+    }
+
+    .team-name {
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .team-bio {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
+    /* ══ GALLERY PAGE ══ */
+    .gallery-header {
+      padding: 120px 32px 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .gallery-mosaic {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: 280px 280px;
+      gap: 4px;
+      padding: 0 32px;
+      margin-bottom: 80px;
+    }
+
+    .gm-item {
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .gm-item:hover .gm-overlay {
+      opacity: 1;
+    }
+
+    .gm-item:nth-child(1) {
+      grid-column: span 3;
+      grid-row: span 2;
+    }
+
+    .gm-item:nth-child(2) {
+      grid-column: span 2;
+    }
+
+    .gm-item:nth-child(3) {
+      grid-column: span 1;
+    }
+
+    .gm-item:nth-child(4) {
+      grid-column: span 1;
+    }
+
+    .gm-item:nth-child(5) {
+      grid-column: span 2;
+    }
+
+    .gm-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.5s ease;
+    }
+
+    .gm-item:hover .gm-placeholder {
+      transform: scale(1.05);
+    }
+
+    .gm-icon {
+      font-size: 3rem;
+    }
+
+    .gm-label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+    }
+
+    .gp1 {
+      background: linear-gradient(160deg, #D4E0C0 0%, #B8C8A0 100%);
+    }
+
+    .gp2 {
+      background: linear-gradient(160deg, #E8E0D0 0%, #D8CEBB 100%);
+    }
+
+    .gp3 {
+      background: linear-gradient(160deg, #F0E8DC 0%, #E4D8C8 100%);
+    }
+
+    .gp4 {
+      background: linear-gradient(160deg, #C8D4B0 0%, #B0BC98 100%);
+    }
+
+    .gp5 {
+      background: linear-gradient(160deg, #DDD8CC 0%, #CCCAB8 100%);
+    }
+
+    .gm-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(107, 122, 62, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: var(--t);
+    }
+
+    .gm-overlay-text {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: white;
+    }
+
+    /* ══ VISIT PAGE ══ */
+    .visit-header {
+      padding: 120px 32px 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .visit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      max-width: 1400px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .visit-info {
+      padding: 60px 32px;
+      border-right: 1px solid var(--border);
+    }
+
+    .visit-form {
+      padding: 60px 32px;
+    }
+
+    .info-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+      gap: 16px;
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
+
+    .info-key {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      padding-top: 2px;
+    }
+
+    .info-val {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .info-val strong {
+      font-weight: 800;
+    }
+
+    .form-title {
+      font-family: 'Lora', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .form-sub {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      margin-bottom: 32px;
+    }
+
+    .form-field {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: var(--text-mid);
+      margin-bottom: 8px;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 0;
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 400;
+      transition: var(--t);
+      outline: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%236B7A3E' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--olive);
+      background: var(--surface);
+    }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* ══ RESERVE PAGE ══ */
+    .reserve-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 120px 32px 80px;
+    }
+
+    .reserve-title {
+      font-family: 'Lora', serif;
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      font-weight: 400;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .reserve-title em {
+      font-style: italic;
+      color: var(--olive);
+    }
+
+    .reserve-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-soft);
+      margin-bottom: 60px;
+    }
+
+    .r-step-nav {
+      display: flex;
+      gap: 0;
+      margin-bottom: 40px;
+      border: 1px solid var(--border);
+    }
+
+    .r-step-btn {
+      flex: 1;
+      padding: 16px;
+      background: var(--surface);
+      border: none;
+      border-right: 1px solid var(--border);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      cursor: default;
+      transition: var(--t);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .r-step-btn:last-child {
+      border-right: none;
+    }
+
+    .r-step-btn.active {
+      background: var(--olive);
+      color: white;
+    }
+
+    .r-step-btn.done {
+      background: var(--sage-pale);
+      color: var(--olive);
+    }
+
+    .r-step-num {
+      font-family: 'Lora', serif;
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .r-content {}
+
+    .r-section-head {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--olive);
+      margin: 32px 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .r-section-head::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+    }
+
+    .cal-day-name {
+      text-align: center;
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      padding: 8px 0;
+    }
+
+    .cal-btn {
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      cursor: pointer;
+      transition: var(--t);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .cal-btn:hover:not(:disabled) {
+      border-color: var(--olive);
+      background: var(--sage-pale);
+    }
+
+    .cal-btn.selected {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--paper);
+    }
+
+    .cal-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .cal-btn .cn {
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .cal-btn .cd {
+      font-size: 0.55rem;
+      font-weight: 600;
+      color: var(--text-soft);
+    }
+
+    .cal-btn.selected .cd {
+      color: rgba(245, 244, 239, 0.6);
+    }
+
+    .time-wrap {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .t-btn {
+      padding: 12px 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      cursor: pointer;
+      transition: var(--t);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-soft);
+      text-align: center;
+    }
+
+    .t-btn:hover {
+      border-color: var(--olive);
+      color: var(--olive);
+    }
+
+    .t-btn.selected {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--paper);
+    }
+
+    .party-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .p-btn {
+      width: 48px;
+      height: 48px;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      cursor: pointer;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      transition: var(--t);
+      font-weight: 800;
+    }
+
+    .p-btn:hover {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+
+    .p-num {
+      font-family: 'Lora', serif;
+      font-size: 3rem;
+      color: var(--text);
+      line-height: 1;
+      min-width: 56px;
+      text-align: center;
+    }
+
+    .p-label {
+      font-size: 0.75rem;
+      color: var(--text-soft);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .r-nav-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 40px;
+    }
+
+    /* Confirm screen */
+    .confirm-box {
+      border: 2px solid var(--ink);
+      padding: 40px;
+      text-align: center;
+    }
+
+    .confirm-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+    }
+
+    .confirm-title {
+      font-family: 'Lora', serif;
+      font-size: 2.5rem;
+      font-weight: 400;
+      color: var(--text);
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    .confirm-sub {
+      font-size: 0.875rem;
+      color: var(--text-soft);
+      margin-bottom: 32px;
+    }
+
+    .confirm-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      text-align: left;
+      margin-bottom: 32px;
+    }
+
+    .confirm-detail-item {
+      padding: 16px;
+      background: var(--surface-2);
+      border-left: 3px solid var(--olive);
+    }
+
+    .cdl {
+      font-size: 0.6rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-soft);
+      margin-bottom: 4px;
+    }
+
+    .cdv {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* ══ LOYALTY PAGE ══ */
+    .loyalty-wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .loyalty-hero-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 60vh;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .loyalty-hero-left {
+      padding: 120px 60px 60px;
+      background: var(--ink);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .loyalty-hero-right {
+      padding: 120px 60px 60px;
+      background: var(--sage-pale);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .lh-label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--olive);
+      margin-bottom: 16px;
+    }
+
+    .lh-label-white {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .lh-title {
+      font-family: 'Lora', serif;
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      font-weight: 400;
+      letter-spacing: -0.04em;
+      color: var(--paper);
+      line-height: 0.95;
+      margin-bottom: 24px;
+    }
+
+    .lh-title-dark {
+      color: var(--text);
+    }
+
+    .lh-desc {
+      font-size: 0.9rem;
+      color: rgba(245, 244, 239, 0.6);
+      line-height: 1.7;
+    }
+
+    .lh-desc-dark {
+      color: var(--text-mid);
+    }
+
+    /* Loyalty card */
+    .loyalty-card-3d {
+      width: 320px;
+      max-width: 100%;
+      aspect-ratio: 1.6;
+      background: var(--ink);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 24px;
+      margin: 32px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .loyalty-card-3d::before {
+      content: '';
+      position: absolute;
+      top: -60%;
+      right: -40%;
+      width: 180%;
+      height: 180%;
+      background: radial-gradient(circle, rgba(107, 122, 62, 0.3) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .lc-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .lc-logo {
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: white;
+    }
+
+    .lc-tier {
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: var(--olive-light);
+      background: rgba(107, 122, 62, 0.2);
+      padding: 4px 8px;
+    }
+
+    .lc-pts {
+      font-family: 'Lora', serif;
+      font-size: 2.8rem;
+      color: white;
+      margin: 20px 0 0;
+      line-height: 1;
+    }
+
+    .lc-pts-label {
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .lc-bottom {
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .lc-name {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .tiers-block {
+      padding: 80px 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tiers-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      border: 1px solid var(--border);
+      margin-top: 40px;
+    }
+
+    .tier-col {
+      padding: 40px 32px;
+      border-right: 1px solid var(--border);
+      transition: var(--t);
+    }
+
+    .tier-col:last-child {
+      border-right: none;
+    }
+
+    .tier-col:hover {
+      background: var(--surface-2);
+    }
+
+    .tier-col.featured {
+      background: var(--olive);
+      border-color: var(--olive);
+    }
+
+    .tier-col.featured .tier-col-name,
+    .tier-col.featured .tier-col-pts,
+    .tier-col.featured .tier-col-desc,
+    .tier-col.featured .tier-perk {
+      color: white;
+    }
+
+    .tier-col.featured .tier-perk::before {
+      color: white;
+    }
+
+    .tier-col-badge {
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: var(--olive);
+      margin-bottom: 24px;
+    }
+
+    .tier-col.featured .tier-col-badge {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .tier-col-name {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .tier-col-pts {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      margin-bottom: 32px;
+    }
+
+    .tier-perks-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .tier-perk {
+      font-size: 0.8rem;
+      color: var(--text-mid);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.4;
+    }
+
+    .tier-perk::before {
+      content: '↗';
+      color: var(--olive);
+      flex-shrink: 0;
+      font-size: 0.75rem;
+    }
+
+    /* ══ FOOTER ══ */
+    footer {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-col {
+      padding: 60px 32px;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-col:last-child {
+      border-right: none;
+    }
+
+    .footer-logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--paper);
+      margin-bottom: 16px;
+    }
+
+    .footer-tagline {
+      font-family: 'Lora', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: rgba(245, 244, 239, 0.4);
+      line-height: 1.5;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 8px;
+      margin-top: 32px;
+    }
+
+    .footer-social {
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(245, 244, 239, 0.4);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: var(--t);
+      text-decoration: none;
+    }
+
+    .footer-social:hover {
+      border-color: var(--olive);
+      color: var(--olive);
+    }
+
+    .footer-col-title {
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(245, 244, 239, 0.3);
+      margin-bottom: 24px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      color: rgba(245, 244, 239, 0.5);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: var(--t);
+    }
+
+    .footer-links a:hover {
+      color: var(--olive-light);
+    }
+
+    .footer-bottom {
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-copy {
+      font-size: 0.7rem;
+      color: rgba(245, 244, 239, 0.2);
+      letter-spacing: 0.06em;
+    }
+
+    /* ══ TOAST ══ */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--olive);
+      color: white;
+      padding: 14px 24px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      box-shadow: var(--shadow-lg);
+      z-index: 2000;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Cart */
+    .cart-pill {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 12px 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: var(--shadow-lg);
+      z-index: 600;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transform: translateY(80px);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .cart-pill.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .cart-pill:hover {
+      background: var(--olive);
+    }
+
+    .cart-bubble {
+      width: 24px;
+      height: 24px;
+      background: var(--olive);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+    }
+
+    .cart-pill.visible:hover .cart-bubble {
+      background: white;
+      color: var(--olive);
+    }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width: 1100px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-right {
+        display: none;
+      }
+
+      .featured-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .drinks-row {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .split-visual {
+        display: none;
+      }
+
+      .split-content {
+        padding: 60px 32px;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .tiers-row {
+        grid-template-columns: 1fr;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .about-hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-hero-aside {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      .loyalty-hero-section {
+        grid-template-columns: 1fr;
+      }
+
+      .loyalty-hero-right {
+        display: none;
+      }
+
+      .loyalty-hero-left {
+        padding: 120px 32px 60px;
+      }
+
+      .confirm-details {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-order {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .hero-left {
+        padding: 60px 24px;
+      }
+
+      .hero-meta {
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+
+      .featured-grid {
+        grid-template-columns: 1fr;
+        border: none;
+        gap: 2px;
+      }
+
+      .feat-card {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .drinks-row {
+        grid-template-columns: 1fr;
+      }
+
+      .testimonials-strip {
+        flex-direction: column;
+      }
+
+      .t-cell {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-col {
+        padding: 40px 24px;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .menu-header {
+        grid-template-columns: 1fr;
+        padding: 100px 24px 40px;
+      }
+
+      .menu-header-right {
+        align-items: flex-start;
+      }
+
+      .menu-row {
+        padding: 16px 24px 16px 24px;
+      }
+
+      .menu-cat-header {
+        padding: 20px 24px;
+      }
+
+      .visit-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .visit-info {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .visit-header,
+      .about-header,
+      .gallery-header {
+        padding: 100px 24px 40px;
+      }
+
+      .container {
+        padding: 0 24px;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr 1fr;
+        border: none;
+        gap: 2px;
+      }
+
+      .team-card {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .gallery-mosaic {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        height: auto;
+      }
+
+      .gm-item:nth-child(n) {
+        grid-column: auto !important;
+        grid-row: auto !important;
+        height: 200px;
+      }
+
+      .time-wrap {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .cal-grid {}
+
+      .r-step-btn {
+        padding: 12px 8px;
+      }
+
+      .reserve-wrapper {
+        padding: 100px 24px 60px;
+      }
+
+      .tiers-row {
+        border: none;
+        gap: 2px;
+      }
+
+      .tier-col {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-inner {
+        padding: 0 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 3rem;
+      }
+
+      .hero-meta {
+        gap: 16px;
+      }
+
+      .form-row-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .drinks-row {
+        gap: 12px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .r-step-btn .r-step-num {
+        font-size: 1rem;
+      }
+    }
+
+    /* ── DEVELOPER CTA — BRUTALIST DESIGN ── */
+    .dev-cta-section {
+      padding: 100px 32px;
+      background: var(--surface-2);
+      border-top: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dev-cta-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1.5px solid var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
+      padding: 80px;
+      position: relative;
+    }
+
+    /* Brutalist Decorative Blobs */
+    .dev-cta-container::after {
+      content: '';
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      width: 100%;
+      height: 100%;
+      background: var(--olive);
+      z-index: -1;
+      opacity: 0.1;
+    }
+
+    .dev-cta-text {
+      flex: 1;
+    }
+
+    .dev-cta-label {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--olive);
+      margin-bottom: 24px;
+    }
+
+    .dev-cta-title {
+      font-family: 'Lora', serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 32px;
+      letter-spacing: -0.04em;
+    }
+
+    .dev-cta-title em {
+      font-style: italic;
+      color: var(--clay);
+    }
+
+    .dev-cta-desc {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+      max-width: 480px;
+      margin-bottom: 48px;
+    }
+
+    .dev-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--ink);
+      color: var(--paper);
+      text-decoration: none;
+      padding: 18px 40px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.75rem;
+      transition: var(--t);
+      border: 1.5px solid var(--ink);
+    }
+
+    .dev-cta-btn:hover {
+      background: var(--olive);
+      border-color: var(--olive);
+      transform: translate(4px, -4px);
+      box-shadow: -8px 8px 0 var(--ink);
+    }
+
+    /* Brutalist Mega Toggle */
+    .mega-toggle-wrap {
+      text-align: center;
+      border: 1.5px solid var(--ink);
+      padding: 40px;
+      background: var(--bg);
+    }
+
+    .mega-toggle-label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 24px;
+    }
+
+    .mega-toggle {
+      width: 140px;
+      height: 70px;
+      background: var(--surface-2);
+      border: 2px solid var(--ink);
+      cursor: pointer;
+      position: relative;
+      transition: var(--t);
+      display: flex;
+      align-items: center;
+      padding: 4px;
+    }
+
+    .mega-toggle-thumb {
+      width: 58px;
+      height: 58px;
+      background: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.5s cubic-bezier(0.87, 0, 0.13, 1);
+      color: var(--paper);
+    }
+
+    [data-theme="dark"] .mega-toggle-thumb {
+      transform: translateX(68px);
+      background: var(--olive);
+    }
+
+    .mt-icon {
+      font-size: 1.5rem;
+      position: absolute;
+      transition: var(--t);
+    }
+
+    [data-theme="dark"] .mt-sun {
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    [data-theme="light"] .mt-moon {
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    @media (max-width: 1024px) {
+      .dev-cta-container {
+        padding: 40px;
+        gap: 40px;
+      }
+
+      .dev-cta-title {
+        font-size: 3rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .dev-cta-container {
+        flex-direction: column;
+        padding: 60px 40px;
+        text-align: center;
+      }
+
+      .dev-cta-desc {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+    /* ── CART PILL ── */
+    .cart-pill {
+      position: fixed; bottom: 32px; right: 32px;
+      background: var(--ink); color: var(--paper);
+      border: 1.5px solid var(--ink);
+      padding: 14px 28px;
+      display: flex; align-items: center; gap: 16px;
+      z-index: 5000; cursor: pointer;
+      opacity: 0; pointer-events: none; transform: translateY(30px);
+      transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+      box-shadow: -6px 6px 0 var(--olive);
+    }
+    .cart-pill:hover { transform: translate(2px, -2px); box-shadow: -8px 8px 0 var(--olive); }
+    .cart-pill.visible { opacity: 1 !important; pointer-events: auto !important; transform: translateY(0) !important; }
+    
+    .cart-pill span { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.15em; }
+    .cart-bubble {
+      background: var(--olive); color: white;
+      width: 26px; height: 26px; display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 800; border: 1.5px solid var(--paper);
+    }
+
+    /* ── MEGA CART & CHECKOUT ── */
+    .cart-overlay {
+      position: fixed; inset: 0; background: rgba(14, 14, 14, 0.4);
+      backdrop-filter: blur(8px); z-index: 2000;
+      opacity: 0; pointer-events: none; transition: var(--t);
+    }
+    .cart-overlay.open { opacity: 1; pointer-events: auto; }
+
+    .cart-panel {
+      position: fixed; top: 0; right: 0; bottom: 0;
+      width: 100%; max-width: 500px;
+      background: var(--bg); border-left: 1.5px solid var(--ink);
+      z-index: 2001; transform: translateX(100%);
+      transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+      display: flex; flex-direction: column;
+    }
+    .cart-overlay.open .cart-panel { transform: translateX(0); }
+
+    .cart-header {
+      padding: 32px; border-bottom: 1.5px solid var(--ink);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .cart-header h2 { font-family: 'Lora', serif; font-size: 1.8rem; font-weight: 400; }
+    .cart-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text); }
+
+    .cart-items { flex: 1; overflow-y: auto; padding: 32px; list-style: none; }
+    .cart-item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 20px 0; border-bottom: 1px solid var(--border);
+    }
+    .cart-item:last-child { border-bottom: none; }
+    .ci-info { flex: 1; }
+    .ci-name { font-size: 0.9rem; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; }
+    .ci-price { font-family: 'Lora', serif; font-size: 1.1rem; color: var(--olive); }
+    .ci-remove {
+      background: none; border: 1.5px solid var(--border);
+      width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: var(--t);
+    }
+    .ci-remove:hover { border-color: var(--clay); color: var(--clay); }
+
+    .cart-footer { padding: 32px; background: var(--surface-2); border-top: 1.5px solid var(--ink); }
+    .cart-total-row {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 24px;
+    }
+    .ct-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; }
+    .ct-val { font-family: 'Lora', serif; font-size: 2rem; color: var(--ink); }
+
+    .cart-empty {
+      height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; color: var(--text-soft); padding: 40px;
+    }
+    .ce-icon { font-size: 4rem; margin-bottom: 16px; opacity: 0.5; }
+
+    /* Order Flow Steps */
+    .cart-step { display: none; height: 100%; flex-direction: column; }
+    .cart-step.active { display: flex; }
+
+    .order-success {
+      text-align: center; padding: 60px 32px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      height: 100%;
+    }
+    .os-icon {
+      width: 80px; height: 80px; background: var(--olive); color: white;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; margin-bottom: 24px;
+    }
+    .os-title { font-family: 'Lora', serif; font-size: 2.2rem; margin-bottom: 12px; }
+    .os-desc { color: var(--text-soft); font-size: 0.9rem; margin-bottom: 32px; max-width: 300px; line-height: 1.6; }
+  </style>
+</head>
+
+<body>
+
+  <!-- CUSTOM CURSOR -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="logo" onclick="nav('home')">
+        <div class="logo-mark">M</div>
+        Matcha House
+      </a>
+      <ul class="nav-links">
+        <li><a href="#" onclick="nav('home')" id="nl-home" class="active">Home</a></li>
+        <li><a href="#" onclick="nav('menu')" id="nl-menu">Menu</a></li>
+        <li><a href="#" onclick="nav('about')" id="nl-about">Our Story</a></li>
+        <li><a href="#" onclick="nav('gallery')" id="nl-gallery">Gallery</a></li>
+        <li><a href="#" onclick="nav('loyalty')" id="nl-loyalty">Membership</a></li>
+        <li><a href="#" onclick="nav('visit')" id="nl-visit">Visit</a></li>
+      </ul>
+      <div class="nav-right">
+        <div class="theme-toggle" onclick="toggleTheme()">
+          <span class="toggle-icon" id="themeIcon">☀</span>
+          <span id="themeLabel">Light</span>
+        </div>
+        <button class="nav-order" onclick="nav('reserve')">Reserve ↗</button>
+        <button class="hamburger" id="burger" onclick="toggleMob()">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#" onclick="nav('home');toggleMob()">Home <span>01</span></a>
+    <a href="#" onclick="nav('menu');toggleMob()">Menu <span>02</span></a>
+    <a href="#" onclick="nav('about');toggleMob()">Our Story <span>03</span></a>
+    <a href="#" onclick="nav('gallery');toggleMob()">Gallery <span>04</span></a>
+    <a href="#" onclick="nav('loyalty');toggleMob()">Membership <span>05</span></a>
+    <a href="#" onclick="nav('visit');toggleMob()">Visit <span>06</span></a>
+    <a href="#" onclick="nav('reserve');toggleMob()">Reserve ↗ <span></span></a>
+  </div>
+
+  <!-- ════════════ HOME ════════════ -->
+  <div class="page active" id="page-home">
+    <section class="hero">
+      <div class="hero-left">
+        <div class="hero-num fade-up">Craft Café &amp; Tea Bar · Est. 2019</div>
+        <h1 class="hero-title d1">
+          Slow<br />
+          <span class="line-italic">coffee.</span><br />
+          Good life.
+        </h1>
+        <p class="hero-desc d2">Specialty matcha, single-origin pour-overs, and handmade food — in a space designed for
+          people who care about what they consume.</p>
+        <div class="hero-actions d3">
+          <button class="btn-ink" onclick="nav('menu')">View Menu ↗</button>
+          <button class="btn-outline" onclick="nav('reserve')">Book a Table</button>
+        </div>
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <div class="hero-meta-num">6</div>
+            <div class="hero-meta-label">Origins Sourced</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="hero-meta-num">52+</div>
+            <div class="hero-meta-label">Menu Items</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="hero-meta-num">4.9</div>
+            <div class="hero-meta-label">Avg Rating</div>
+          </div>
+        </div>
+        <div class="hero-scroll-hint">
+          <div class="scroll-line"></div>
+          Scroll to explore
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-visual-content">
+          <div class="hero-big-circle">
+            <div class="hero-circle-inner">
+              <div class="hero-circle-text">抹茶</div>
+              <div class="hero-circle-sub">Ceremonial Matcha</div>
+            </div>
+          </div>
+          <div class="hero-tag hero-tag-1">
+            <div>Today's Special</div>
+            <span class="tag-val">Rose Matcha</span>
+          </div>
+          <div class="hero-tag hero-tag-2">
+            <div>Open Now</div>
+            <span class="tag-val">7am – 9pm</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee-wrap">
+      <div class="marquee-track">
+        <div class="marquee-item">Specialty Coffee</div>
+        <div class="marquee-item">Ceremonial Matcha</div>
+        <div class="marquee-item">Cold Brew</div>
+        <div class="marquee-item">Fresh Pastries</div>
+        <div class="marquee-item">Single Origin</div>
+        <div class="marquee-item">Plant Based</div>
+        <div class="marquee-item">Free Wi-Fi</div>
+        <div class="marquee-item">Specialty Coffee</div>
+        <div class="marquee-item">Ceremonial Matcha</div>
+        <div class="marquee-item">Cold Brew</div>
+        <div class="marquee-item">Fresh Pastries</div>
+        <div class="marquee-item">Single Origin</div>
+        <div class="marquee-item">Plant Based</div>
+        <div class="marquee-item">Free Wi-Fi</div>
+      </div>
+    </div>
+
+    <!-- FEATURED -->
+    <div style="padding: 80px 0 0;">
+      <div class="container" style="margin-bottom: 32px;">
+        <div class="section-label">What We Do</div>
+        <div class="section-title">Crafted<br /><em>with intention</em></div>
+      </div>
+      <div class="featured-grid">
+        <div class="feat-card">
+          <div class="feat-num">01</div>
+          <div class="feat-name">Specialty Coffee</div>
+          <div class="feat-desc">Every bag sourced direct from farmers. Every shot dialled to 0.1g precision. No
+            compromises, no shortcuts.</div>
+          <div class="feat-tag">Filter · Espresso · Cold Brew</div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-num">02</div>
+          <div class="feat-name">Japanese Matcha</div>
+          <div class="feat-desc">Ceremonial grade from Uji, Kyoto. Whisked to order. Served with or without milk, hot or
+            iced.</div>
+          <div class="feat-tag">Uji · Ceremonial · Organic</div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-num">03</div>
+          <div class="feat-name">Kitchen &amp; Bakery</div>
+          <div class="feat-desc">Everything made in-house. Seasonal ingredients. Honest food that pairs perfectly with
+            your drink of choice.</div>
+          <div class="feat-tag">Made Daily · Seasonal</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DRINKS -->
+    <div style="padding: 80px 0;">
+      <div class="container">
+        <div
+          style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:0;">
+          <div>
+            <div class="section-label">Popular Picks</div>
+            <div class="section-title">On the<br /><em>menu</em></div>
+          </div>
+          <button class="btn-outline" onclick="nav('menu')" style="align-self:flex-end;">Full Menu ↗</button>
+        </div>
+        <div class="drinks-row">
+          <div class="drink-cell" onclick="addCart('Matcha Latte', 320)">
+            <div class="drink-cell-num">— 01</div>
+            <span class="drink-cell-emoji">🍵</span>
+            <div class="drink-cell-name">Matcha Latte</div>
+            <div class="drink-cell-desc">Uji ceremonial grade, oat milk, no sugar added</div>
+            <div class="drink-cell-price">Rs. 320</div>
+            <button class="drink-cell-add" onclick="event.stopPropagation(); addCart('Matcha Latte', 320)">+</button>
+          </div>
+          <div class="drink-cell" onclick="addCart('Pour Over', 280)">
+            <div class="drink-cell-num">— 02</div>
+            <span class="drink-cell-emoji">☕</span>
+            <div class="drink-cell-name">Pour Over</div>
+            <div class="drink-cell-desc">Ethiopian Yirgacheffe, floral, fruity, bright</div>
+            <div class="drink-cell-price">Rs. 280</div>
+            <button class="drink-cell-add" onclick="event.stopPropagation(); addCart('Pour Over', 280)">+</button>
+          </div>
+          <div class="drink-cell" onclick="addCart('Cold Brew Tonic', 340)">
+            <div class="drink-cell-num">— 03</div>
+            <span class="drink-cell-emoji">🧊</span>
+            <div class="drink-cell-name">Cold Brew Tonic</div>
+            <div class="drink-cell-desc">24-hr cold brew, fever-tree tonic, orange peel</div>
+            <div class="drink-cell-price">Rs. 340</div>
+            <button class="drink-cell-add" onclick="event.stopPropagation(); addCart('Cold Brew Tonic', 340)">+</button>
+          </div>
+          <div class="drink-cell" onclick="addCart('Hojicha Latte', 300)">
+            <div class="drink-cell-num">— 04</div>
+            <span class="drink-cell-emoji">🌾</span>
+            <div class="drink-cell-name">Hojicha Latte</div>
+            <div class="drink-cell-desc">Roasted green tea, coconut milk, toasty finish</div>
+            <div class="drink-cell-price">Rs. 300</div>
+            <button class="drink-cell-add" onclick="event.stopPropagation(); addCart('Hojicha Latte', 300)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPLIT -->
+    <div class="split">
+      <div class="split-visual">
+        <div class="geo-grid">
+          <div class="geo-cell"></div>
+          <div class="geo-cell"></div>
+          <div class="geo-cell"></div>
+          <div class="geo-cell"></div>
+          <div class="geo-cell"></div>
+          <div class="geo-cell"></div>
+          <div class="geo-cell"></div>
+          <div class="geo-cell"></div>
+          <div class="geo-cell"></div>
+        </div>
+      </div>
+      <div class="split-content">
+        <div class="section-label">Our Philosophy</div>
+        <div class="section-title">Slow<br /><em>is better</em></div>
+        <blockquote class="big-quote">"We don't do fast. We do intentional. Every drink takes the time it deserves."
+        </blockquote>
+        <p>Our baristas train for six months before they pull a single shot on bar. Our matcha is hand-whisked. Our food
+          uses no shortcuts. This is what we mean when we say craft.</p>
+        <p>We believe the café is one of the last truly public spaces — a place for conversation, for focus, for rest.
+          We protect that.</p>
+        <button class="btn-ink" onclick="nav('about')" style="margin-top: 24px; align-self: flex-start;">Our Story
+          ↗</button>
+      </div>
+    </div>
+
+    <!-- TESTIMONIALS -->
+    <div style="padding: 60px 0;">
+      <div class="container" style="margin-bottom: 32px;">
+        <div class="section-label">Guest Reviews</div>
+        <div class="section-title"><em>What people</em><br />are saying</div>
+      </div>
+      <div class="testimonials-strip">
+        <div class="t-cell">
+          <div class="t-stars">★★★★★</div>
+          <div class="t-text">"The pour over changed how I think about coffee. I've never tasted anything like it in
+            Kathmandu."</div>
+          <div class="t-by">Samira K. — Regular</div>
+        </div>
+        <div class="t-cell">
+          <div class="t-stars">★★★★★</div>
+          <div class="t-text">"The space is beautiful and the matcha is the real deal. Not the sugary green stuff. This
+            is the actual thing."</div>
+          <div class="t-by">Tenzing D. — Food Writer</div>
+        </div>
+        <div class="t-cell">
+          <div class="t-stars">★★★★★</div>
+          <div class="t-text">"I work from here every Tuesday. The staff know my order, the Wi-Fi never fails, the vibe
+            is unmatched."</div>
+          <div class="t-by">Priya M. — Designer</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEVELOPER CTA -->
+    <section class="dev-cta-section">
+      <div class="dev-cta-container">
+        <div class="dev-cta-text">
+          <span class="dev-cta-label">Crafted with intention</span>
+          <h2 class="dev-cta-title">Built by<br /><em>Sushant Raj Mishra</em></h2>
+          <p class="dev-cta-desc">Merging Japanese minimalism with brutalist functionalism. Crafting digital experiences
+            that stand the test of time.</p>
+          <a href="https://sushantrm.com.np/" target="_blank" class="dev-cta-btn">
+            Contact the developer ↗
+          </a>
+        </div>
+        <div class="dev-cta-visual">
+          <div class="mega-toggle-wrap">
+            <div class="mega-toggle-label">Switch System</div>
+            <button class="mega-toggle" onclick="toggleTheme()" aria-label="Theme toggle">
+              <div class="mega-toggle-thumb">
+                <span class="mt-icon mt-sun">☀</span>
+                <span class="mt-icon mt-moon">◐</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- FOOTER -->
+    <!-- DEVELOPER CTA -->
+    <footer>
+      <div class="footer-top">
+        <div class="footer-col">
+          <div class="footer-logo">Matcha House</div>
+          <div class="footer-tagline">Slow coffee.<br />Good life.<br />Thamel, Kathmandu.</div>
+          <div class="footer-socials">
+            <a href="#" class="footer-social">ig</a>
+            <a href="#" class="footer-social">fb</a>
+            <a href="#" class="footer-social">tt</a>
+            <a href="#" class="footer-social">tw</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Explore</div>
+          <ul class="footer-links">
+            <li><a href="#" onclick="nav('home')">Home</a></li>
+            <li><a href="#" onclick="nav('menu')">Menu</a></li>
+            <li><a href="#" onclick="nav('about')">Our Story</a></li>
+            <li><a href="#" onclick="nav('gallery')">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">More</div>
+          <ul class="footer-links">
+            <li><a href="#" onclick="nav('loyalty')">Membership</a></li>
+            <li><a href="#" onclick="nav('reserve')">Reservations</a></li>
+            <li><a href="#" onclick="nav('visit')">Visit Us</a></li>
+            <li><a href="#">Wholesale</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Contact</div>
+          <ul class="footer-links">
+            <li><a href="#">Thamel, KTM</a></li>
+            <li><a href="#">+977 1 4800000</a></li>
+            <li><a href="#">hi@matchahouse.np</a></li>
+            <li><a href="#">7am – 9pm Daily</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2025 Matcha House. All rights reserved.</div>
+        <div class="footer-copy">Privacy · Terms</div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ════════════ MENU ════════════ -->
+  <div class="page" id="page-menu">
+    <div class="menu-header">
+      <div>
+        <div class="section-label">What We Serve</div>
+        <div class="section-title">The<br /><em>Full Menu</em></div>
+      </div>
+      <div class="menu-header-right">
+        <p style="font-size:0.8rem; color:var(--text-soft); max-width:300px; text-align:right; line-height:1.6;">All
+          items made fresh. Menu changes seasonally. Dietary info available on request.</p>
+        <div class="menu-filter-row">
+          <button class="mf-btn active" onclick="filterMenu(this,'all')">All</button>
+          <button class="mf-btn" onclick="filterMenu(this,'coffee')">Coffee</button>
+          <button class="mf-btn" onclick="filterMenu(this,'tea')">Tea</button>
+          <button class="mf-btn" onclick="filterMenu(this,'food')">Food</button>
+          <button class="mf-btn" onclick="filterMenu(this,'pastry')">Pastries</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-items-list" id="menuList">
+      <!-- Coffee -->
+      <div class="menu-category" data-cat="coffee">
+        <div class="menu-cat-header" onclick="toggleCat(this)">
+          <div class="cat-num">01</div>
+          <div class="cat-name">Coffee <span class="cat-toggle">+</span></div>
+        </div>
+        <div class="menu-cat-body open">
+          <div class="menu-row" onclick="addCart('Pour Over — Ethiopia', 280)">
+            <div>
+              <div class="menu-row-name">Pour Over — Ethiopia</div>
+              <div class="menu-row-desc">Yirgacheffe, washed, notes of jasmine and bergamot</div>
+              <div class="menu-row-tags"><span class="mtag mtag-v">Single Origin</span><span
+                  class="mtag mtag-n">Filter</span></div>
+            </div>
+            <div class="menu-row-right">
+              <div class="menu-row-price">Rs. 280</div><button class="menu-add"
+                onclick="event.stopPropagation();addCart('Pour Over', 280)">+</button>
+            </div>
+          </div>
+          <div class="menu-row" onclick="addCart('Flat White', 250)">
+            <div>
+              <div class="menu-row-name">Flat White</div>
+              <div class="menu-row-desc">Ristretto, textured whole or oat milk, classic</div>
+              <div class="menu-row-tags"><span class="mtag mtag-n">Espresso</span></div>
+            </div>
+            <div class="menu-row-right">
+              <div class="menu-row-price">Rs. 250</div><button class="menu-add"
+                onclick="event.stopPropagation();addCart('Flat White', 250)">+</button>
+            </div>
+          </div>
+          <div class="menu-row" onclick="addCart('Cold Brew Tonic', 340)">
+            <div>
+              <div class="menu-row-name">Cold Brew Tonic</div>
+              <div class="menu-row-desc">24-hr cold brew, Fever-Tree tonic, orange peel</div>
+              <div class="menu-row-tags"><span class="mtag mtag-n">Cold</span><span class="mtag mtag-v">Popular</span>
+              </div>
+            </div>
+            <div class="menu-row-right">
+              <div class="menu-row-price">Rs. 340</div><button class="menu-add"
+                onclick="event.stopPropagation();addCart('Cold Brew Tonic', 340)">+</button>
+            </div>
+          </div>
+          <div class="menu-row" onclick="addCart('Espresso', 180)">
+            <div>
+              <div class="menu-row-name">Double Espresso</div>
+              <div class="menu-row-desc">Seasonally blended, 9-bar, 28-second extraction</div>
+            </div>
+            <div class="menu-row-right">
+              <div class="menu-row-price">Rs. 180</div><button class="menu-add"
+                onclick="event.stopPropagation();addCart('Espresso', 180)">+</button>
+            </div>
+          </div>
+          <div class="menu-row" onclick="addCart('Cortado', 220)">
+            <div>
+              <div class="menu-row-name">Cortado</div>
+              <div class="menu-row-desc">Equal parts ristretto and steamed milk</div>
+            </div>
+            <div class="menu-row-right">
+              <div class="menu-row-price">Rs. 220</div><button class="menu-add"
+                onclick="event.stopPropagation();addCart('Cortado', 220)">+</button>
+            </div>
+          </div>
+          <div class="menu-row" onclick="addCart('Nitro Cold Brew', 360)">
+            <div>
+              <div class="menu-row-name">Nitro Cold Brew</div>
+              <div class="menu-row-desc">N2-infused, creamy texture, no milk needed</div>
+              <div class="menu-row-tags"><span class="mtag mtag-v">Vegan</span><span
+                  class="mtag mtag-n">Signature</span></div>
+            </div>
+            <div class="menu-row-right">
+              <div class="menu-row-price">Rs. 360</div><button class="menu-add"
+                onclick="event.stopPropagation();addCart('Nitro Cold Brew', 360)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Tea & Matcha -->
+      <div class="menu-category" data-cat="tea">
+        <div class="menu-cat-header" onclick="toggleCat(this)">
+          <div class="cat-num">02</div>
+          <div class="cat-name">Tea &amp; Matcha <span class="cat-toggle">+</span></div>
+        </div>
+        <div class="menu-cat-body open">
+          <div class="menu-row" onclick="addCart('Matcha Latte', 320)">
+            <div>
+              <div class="menu-row-name">Matcha Latte</div>
+              <div class="menu-row-desc">Uji ceremonial, oat milk, no sugar</div>
+              <div class="menu-row-tags"><span class="mtag mtag-v">Vegan</span><span
+                  class="mtag mtag-v">Signature</span></div>
+            </div>
+            <div class="menu-row-right">
+              <div class="menu-row-price">Rs. 320</div><button class="menu-add"
+                onclick="event.stopPropagation();addCart('Matcha Latte', 320)">+</button>
+            </div>
+          </div>
+          <div class="menu-row" onclick="addCart('Hojicha Latte', 300)">
+            <div>
+              <div class="menu-row-name">Hojicha Latte</div>
+              <div class="menu-row-desc">Roasted green tea, coconut milk, naturally sweet</div>
+              <div class="menu-row-tags"><span class="mtag mtag-v">Vegan</span></div>
+            </div>
+            <div class="menu-row-right">
+              <div class="menu-row-price">Rs. 300</div><button class="menu-add"
+                onclick="event.stopPropagation();addCart('Hojicha Latte', 300)">+</button>
+            </div>
+          </div>
+          <div class="menu-row" onclick="addCart('Genmaicha', 200)">
+            <div>
+              <div class="menu-row-name">Genmaicha</div>
+              <div class="menu-row-desc">Green tea with roasted brown rice, earthy and toasty</div>
+            </div>
+            <div class="menu-row-right">
+              <div class="menu-row-price">Rs. 200</div><button class="menu-add"
+                onclick="event.stopPropagation();addCart('Genmaicha', 200)">+</button>
+            </div>
+          </div>
+          <div class="menu-row" onclick="addCart('Iced Rose Matcha', 340)">
+            <div>
+              <div class="menu-row-name">Iced Rose Matcha</div>
+              <div class="menu-row-desc">Ceremonial matcha, rose syrup, oat milk, shaken</div>
+              <div class="menu-row-tags"><span class="mtag mtag-v">Bestseller</span></div>
+            </div>
+            <div class="menu-row-right">
+              <div class="menu-row-price">Rs. 340</div><button class="menu-add"
+                onclick="event.stopPropagation();addCart('Iced Rose Matcha', 340)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Food -->
+      <div class="menu-category" data-cat="food">
+        <div class="menu-cat-header" onclick="toggleCat(this)">
+          <div class="cat-num">03</div>
+          <div class="cat-name">Kitchen <span class="cat-toggle">+</span></div>
+        </div>
+        <div class="menu-cat-body">
+          <div class="menu-row" onclick="addCart('Avocado Toast', 480)">
+            <div>
+              <div class="menu-row-name">Avocado Toast</div>
+              <div class="menu-row-desc">Sourdough, smashed avocado, za'atar, lemon, chilli</div>
+              <div class="menu-row-tags"><span class="mtag mtag-v">Vegan</span></div>
+            </div>
+            <div class="menu-row-right">
+              <div class="menu-row-price">Rs. 480</div><button class="menu-add"
+                onclick="event.stopPropagation();addCart('Avocado Toast', 480)">+</button>
+            </div>
+          </div>
+          <div class="menu-row" onclick="addCart('Grain Bowl', 520)">
+            <div>
+              <div class="menu-row-name">Grain Bowl</div>
+              <div class="menu-row-desc">Farro, roasted seasonal veg, miso dressing, seeds</div>
+              <div class="menu-row-tags"><span class="mtag mtag-v">Vegan</span><span class="mtag mtag-n">GF
+                  option</span></div>
+            </div>
+            <div class="menu-row-right">
+              <div class="menu-row-price">Rs. 520</div><button class="menu-add"
+                onclick="event.stopPropagation();addCart('Grain Bowl', 520)">+</button>
+            </div>
+          </div>
+          <div class="menu-row" onclick="addCart('Egg & Greens', 460)">
+            <div>
+              <div class="menu-row-name">Eggs &amp; Greens</div>
+              <div class="menu-row-desc">Two poached eggs, wilted greens, labneh, sourdough</div>
+              <div class="menu-row-tags"><span class="mtag mtag-h">Vegetarian</span></div>
+            </div>
+            <div class="menu-row-right">
+              <div class="menu-row-price">Rs. 460</div><button class="menu-add"
+                onclick="event.stopPropagation();addCart('Eggs & Greens', 460)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Pastries -->
+      <div class="menu-category" data-cat="pastry">
+        <div class="menu-cat-header" onclick="toggleCat(this)">
+          <div class="cat-num">04</div>
+          <div class="cat-name">Bakery <span class="cat-toggle">+</span></div>
+        </div>
+        <div class="menu-cat-body">
+          <div class="menu-row" onclick="addCart('Kouign-Amann', 220)">
+            <div>
+              <div class="menu-row-name">Kouign-Amann</div>
+              <div class="menu-row-desc">Breton butter cake, caramelised, made in house daily</div>
+            </div>
+            <div class="menu-row-right">
+              <div class="menu-row-price">Rs. 220</div><button class="menu-add"
+                onclick="event.stopPropagation();addCart('Kouign-Amann', 220)">+</button>
+            </div>
+          </div>
+          <div class="menu-row" onclick="addCart('Matcha Financier', 180)">
+            <div>
+              <div class="menu-row-name">Matcha Financier</div>
+              <div class="menu-row-desc">Almond, Uji matcha, brown butter, crispy edge</div>
+              <div class="menu-row-tags"><span class="mtag mtag-v">Signature</span></div>
+            </div>
+            <div class="menu-row-right">
+              <div class="menu-row-price">Rs. 180</div><button class="menu-add"
+                onclick="event.stopPropagation();addCart('Matcha Financier', 180)">+</button>
+            </div>
+          </div>
+          <div class="menu-row" onclick="addCart('Miso Banana Bread', 200)">
+            <div>
+              <div class="menu-row-name">Miso Banana Bread</div>
+              <div class="menu-row-desc">White miso caramel, black sesame, moist crumb</div>
+            </div>
+            <div class="menu-row-right">
+              <div class="menu-row-price">Rs. 200</div><button class="menu-add"
+                onclick="event.stopPropagation();addCart('Miso Banana Bread', 200)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="height: 80px;"></div>
+
+    <!-- DEVELOPER CTA -->
+    <section class="dev-cta-section">
+      <div class="dev-cta-container">
+        <div class="dev-cta-text">
+          <span class="dev-cta-label">Crafted with intention</span>
+          <h2 class="dev-cta-title">Built by<br /><em>Sushant Raj Mishra</em></h2>
+          <p class="dev-cta-desc">Merging Japanese minimalism with brutalist functionalism. Crafting digital experiences
+            that stand the test of time.</p>
+          <a href="https://sushantrm.com.np/" target="_blank" class="dev-cta-btn">
+            Contact the developer ↗
+          </a>
+        </div>
+        <div class="dev-cta-visual">
+          <div class="mega-toggle-wrap">
+            <div class="mega-toggle-label">Switch System</div>
+            <button class="mega-toggle" onclick="toggleTheme()" aria-label="Theme toggle">
+              <div class="mega-toggle-thumb">
+                <span class="mt-icon mt-sun">☀</span>
+                <span class="mt-icon mt-moon">◐</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-top">
+        <div class="footer-col">
+          <div class="footer-logo">Matcha House</div>
+          <div class="footer-tagline">Slow coffee. Good life.</div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Pages</div>
+          <ul class="footer-links">
+            <li><a href="#" onclick="nav('home')">Home</a></li>
+            <li><a href="#" onclick="nav('about')">Story</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Visit</div>
+          <ul class="footer-links">
+            <li><a href="#">Thamel, KTM</a></li>
+            <li><a href="#">7am–9pm</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Contact</div>
+          <ul class="footer-links">
+            <li><a href="#">hi@matchahouse.np</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2025 Matcha House.</div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ════════════ ABOUT ════════════ -->
+  <div class="page" id="page-about">
+    <div class="about-header">
+      <div class="section-label">Est. 2019 · Thamel, Kathmandu</div>
+      <div class="section-title">We are<br /><em>Matcha House</em></div>
+      <div class="about-hero-grid">
+        <div class="about-hero-text">
+          <h2>Built on the belief that <em>how</em> you make something matters as much as what you make.</h2>
+          <p>Matcha House started as a deliberate act of slowness in a city that never stops moving. Our founders — a
+            barista and a tea master — wanted to prove that the craft experience didn't have to come with a plane ticket
+            to Tokyo or Melbourne.</p>
+          <p>We started in a 200 sq ft space in 2019 with a single grinder and a bag of Ethiopian beans. Today we occupy
+            three floors, employ 22 people, and serve over 600 guests daily — but the ethos has never changed.</p>
+          <p>Every decision at Matcha House starts with one question: does this make the experience more honest, more
+            intentional, more alive? If the answer is no, we don't do it.</p>
+          <button class="btn-ink" onclick="nav('menu')" style="margin-top: 20px;">Explore Menu ↗</button>
+        </div>
+        <div class="about-hero-aside">
+          <div class="aside-stat">
+            <div class="aside-stat-num">2019</div>
+            <div class="aside-stat-label">Year Founded</div>
+          </div>
+          <div class="aside-stat">
+            <div class="aside-stat-num">22</div>
+            <div class="aside-stat-label">Team Members</div>
+          </div>
+          <div class="aside-stat">
+            <div class="aside-stat-num">6</div>
+            <div class="aside-stat-label">Origins Sourced</div>
+          </div>
+          <div class="aside-stat">
+            <div class="aside-stat-num">600+</div>
+            <div class="aside-stat-label">Daily Guests</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-team">
+      <div class="section-label">The Humans Behind It</div>
+      <div class="section-title">Our <em>team</em></div>
+      <div class="team-grid">
+        <div class="team-card">
+          <span class="team-avatar">👩‍🍳</span>
+          <div class="team-role">Founder · Head Roaster</div>
+          <div class="team-name">Yuki Tamang</div>
+          <div class="team-bio">Trained in Kyoto and Melbourne. SCA certified. Believes that a great cup is the highest
+            form of hospitality.</div>
+        </div>
+        <div class="team-card">
+          <span class="team-avatar">👨‍🍵</span>
+          <div class="team-role">Co-founder · Tea Director</div>
+          <div class="team-name">Kiran Shrestha</div>
+          <div class="team-bio">Tea master with roots in Ilam. Sourced our first Uji matcha directly from a
+            4th-generation farmer in Kyoto.</div>
+        </div>
+        <div class="team-card">
+          <span class="team-avatar">👩‍🎨</span>
+          <div class="team-role">Head Barista · Trainer</div>
+          <div class="team-name">Meena Rai</div>
+          <div class="team-bio">2023 Nepal Barista Champion. She trains every new barista personally, no exceptions.
+          </div>
+        </div>
+        <div class="team-card">
+          <span class="team-avatar">🧑‍🍳</span>
+          <div class="team-role">Head of Kitchen</div>
+          <div class="team-name">Rajan Thapa</div>
+          <div class="team-bio">Le Cordon Bleu trained. Believes kitchen food in a café should be every bit as
+            considered as the drinks.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEVELOPER CTA -->
+    <section class="dev-cta-section">
+      <div class="dev-cta-container">
+        <div class="dev-cta-text">
+          <span class="dev-cta-label">Crafted with intention</span>
+          <h2 class="dev-cta-title">Built by<br /><em>Sushant Raj Mishra</em></h2>
+          <p class="dev-cta-desc">Merging Japanese minimalism with brutalist functionalism. Crafting digital experiences
+            that stand the test of time.</p>
+          <a href="https://sushantrm.com.np/" target="_blank" class="dev-cta-btn">
+            Contact the developer ↗
+          </a>
+        </div>
+        <div class="dev-cta-visual">
+          <div class="mega-toggle-wrap">
+            <div class="mega-toggle-label">Switch System</div>
+            <button class="mega-toggle" onclick="toggleTheme()" aria-label="Theme toggle">
+              <div class="mega-toggle-thumb">
+                <span class="mt-icon mt-sun">☀</span>
+                <span class="mt-icon mt-moon">◐</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-top">
+        <div class="footer-col">
+          <div class="footer-logo">Matcha House</div>
+          <div class="footer-tagline">Slow coffee. Good life.</div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Pages</div>
+          <ul class="footer-links">
+            <li><a href="#" onclick="nav('home')">Home</a></li>
+            <li><a href="#" onclick="nav('menu')">Menu</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Visit</div>
+          <ul class="footer-links">
+            <li><a href="#">Thamel, KTM</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Contact</div>
+          <ul class="footer-links">
+            <li><a href="#">hi@matchahouse.np</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2025 Matcha House.</div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ════════════ GALLERY ════════════ -->
+  <div class="page" id="page-gallery">
+    <div class="gallery-header">
+      <div class="section-label">The Space</div>
+      <div class="section-title">A place<br /><em>worth seeing</em></div>
+      <p style="font-size:0.9rem; color:var(--text-soft); margin-top:16px; max-width:480px; line-height:1.7;">Three
+        floors of considered design. Exposed concrete, timber, and a lot of natural light. We built the space to support
+        both deep focus and easy conversation.</p>
+    </div>
+    <div class="gallery-mosaic">
+      <div class="gm-item gp1">
+        <div class="gm-placeholder"><span class="gm-icon">☕</span><span class="gm-label">The Main Bar</span></div>
+        <div class="gm-overlay"><span class="gm-overlay-text">View ↗</span></div>
+      </div>
+      <div class="gm-item gp2">
+        <div class="gm-placeholder"><span class="gm-icon">🪴</span><span class="gm-label">Window Seats</span></div>
+        <div class="gm-overlay"><span class="gm-overlay-text">View ↗</span></div>
+      </div>
+      <div class="gm-item gp3">
+        <div class="gm-placeholder"><span class="gm-icon">📐</span><span class="gm-label">Architecture</span></div>
+        <div class="gm-overlay"><span class="gm-overlay-text">View ↗</span></div>
+      </div>
+      <div class="gm-item gp4">
+        <div class="gm-placeholder"><span class="gm-icon">🍵</span><span class="gm-label">Matcha Bar</span></div>
+        <div class="gm-overlay"><span class="gm-overlay-text">View ↗</span></div>
+      </div>
+      <div class="gm-item gp5">
+        <div class="gm-placeholder"><span class="gm-icon">🌿</span><span class="gm-label">Second Floor</span></div>
+        <div class="gm-overlay"><span class="gm-overlay-text">View ↗</span></div>
+      </div>
+    </div>
+    <div class="container" style="padding-bottom: 80px;">
+      <div
+        style="display:flex; gap:20px; align-items:center; flex-wrap:wrap; border-top:1px solid var(--border); padding-top: 40px;">
+        <div>
+          <div class="section-label">Instagram</div>
+          <div class="section-title" style="font-size:1.8rem;"><em>@matchahouse.ktm</em></div>
+        </div>
+        <button class="btn-ink" style="margin-left:auto;">Follow Us ↗</button>
+      </div>
+    </div>
+    <!-- DEVELOPER CTA -->
+    <section class="dev-cta-section">
+      <div class="dev-cta-container">
+        <div class="dev-cta-text">
+          <span class="dev-cta-label">Crafted with intention</span>
+          <h2 class="dev-cta-title">Built by<br /><em>Sushant Raj Mishra</em></h2>
+          <p class="dev-cta-desc">Merging Japanese minimalism with brutalist functionalism. Crafting digital experiences
+            that stand the test of time.</p>
+          <a href="https://sushantrm.com.np/" target="_blank" class="dev-cta-btn">
+            Contact the developer ↗
+          </a>
+        </div>
+        <div class="dev-cta-visual">
+          <div class="mega-toggle-wrap">
+            <div class="mega-toggle-label">Switch System</div>
+            <button class="mega-toggle" onclick="toggleTheme()" aria-label="Theme toggle">
+              <div class="mega-toggle-thumb">
+                <span class="mt-icon mt-sun">☀</span>
+                <span class="mt-icon mt-moon">◐</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-top">
+        <div class="footer-col">
+          <div class="footer-logo">Matcha House</div>
+          <div class="footer-tagline">Slow coffee. Good life.</div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Pages</div>
+          <ul class="footer-links">
+            <li><a href="#" onclick="nav('home')">Home</a></li>
+            <li><a href="#" onclick="nav('menu')">Menu</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Visit</div>
+          <ul class="footer-links">
+            <li><a href="#">Thamel, KTM</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Contact</div>
+          <ul class="footer-links">
+            <li><a href="#">hi@matchahouse.np</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2025 Matcha House.</div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ════════════ LOYALTY ════════════ -->
+  <div class="page" id="page-loyalty">
+    <div class="loyalty-wrap">
+      <div class="loyalty-hero-section">
+        <div class="loyalty-hero-left">
+          <div class="lh-label lh-label-white">Membership Program</div>
+          <div class="lh-title">The<br /><em>House</em><br />Card</div>
+          <div class="lh-desc">Every visit earns you points. Points unlock things worth having.</div>
+          <div class="loyalty-card-3d">
+            <div class="lc-top">
+              <div class="lc-logo">Matcha House</div>
+              <div class="lc-tier">Jade Member</div>
+            </div>
+            <div class="lc-pts">3,200</div>
+            <div class="lc-pts-label">Points Balance</div>
+            <div class="lc-bottom">
+              <div class="lc-name">Yuki Tamang</div>
+              <div style="font-size:0.6rem; color:rgba(255,255,255,0.3); font-weight:700; letter-spacing:0.06em;">VALID
+                THRU 12/26</div>
+            </div>
+          </div>
+          <button class="btn-outline" style="border-color:rgba(255,255,255,0.2); color:var(--paper); margin-top:8px;"
+            onclick="nav('reserve')">Start Earning ↗</button>
+        </div>
+        <div class="loyalty-hero-right">
+          <div class="lh-label">How it works</div>
+          <div class="lh-title lh-title-dark">Earn.<br />Redeem.<br /><em>Repeat.</em></div>
+          <div class="lh-desc lh-desc-dark">Collect 1 point per Rs. 10. Redeem for free drinks, food, and exclusive
+            experiences. The more you visit, the better it gets.</div>
+          <div style="margin-top:40px; display:flex; flex-direction:column; gap:20px;">
+            <div
+              style="display:flex; align-items:flex-start; gap:16px; padding:20px; background:var(--surface); border:1px solid var(--border);">
+              <div style="font-size:1.5rem;">🫘</div>
+              <div>
+                <div
+                  style="font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--text); margin-bottom:4px;">
+                  Earn Points</div>
+                <div style="font-size:0.8rem; color:var(--text-soft); line-height:1.5;">1 point per Rs. 10 spent on
+                  anything in-store or via app</div>
+              </div>
+            </div>
+            <div
+              style="display:flex; align-items:flex-start; gap:16px; padding:20px; background:var(--surface); border:1px solid var(--border);">
+              <div style="font-size:1.5rem;">🎁</div>
+              <div>
+                <div
+                  style="font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--text); margin-bottom:4px;">
+                  Redeem Rewards</div>
+                <div style="font-size:0.8rem; color:var(--text-soft); line-height:1.5;">Free drinks, priority seating,
+                  exclusive member events</div>
+              </div>
+            </div>
+            <div
+              style="display:flex; align-items:flex-start; gap:16px; padding:20px; background:var(--surface); border:1px solid var(--border);">
+              <div style="font-size:1.5rem;">🌿</div>
+              <div>
+                <div
+                  style="font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--text); margin-bottom:4px;">
+                  Level Up</div>
+                <div style="font-size:0.8rem; color:var(--text-soft); line-height:1.5;">Reach new tiers: Seedling → Leaf
+                  → Jade → Ceremonial</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tiers-block">
+        <div class="section-label">Membership Tiers</div>
+        <div class="section-title">Four levels.<br /><em>Better with each.</em></div>
+        <div class="tiers-row">
+          <div class="tier-col">
+            <div class="tier-col-badge">Tier 01</div>
+            <div class="tier-col-name">Seedling</div>
+            <div class="tier-col-pts">0 – 999 pts</div>
+            <ul class="tier-perks-list">
+              <li class="tier-perk">1 pt per Rs. 10</li>
+              <li class="tier-perk">Birthday drink reward</li>
+              <li class="tier-perk">Members newsletter</li>
+            </ul>
+          </div>
+          <div class="tier-col">
+            <div class="tier-col-badge">Tier 02</div>
+            <div class="tier-col-name">Leaf</div>
+            <div class="tier-col-pts">1,000 – 3,999 pts</div>
+            <ul class="tier-perks-list">
+              <li class="tier-perk">1.25x points multiplier</li>
+              <li class="tier-perk">Free drink every 8th visit</li>
+              <li class="tier-perk">Early access to seasonal menu</li>
+              <li class="tier-perk">10% off all food</li>
+            </ul>
+          </div>
+          <div class="tier-col featured">
+            <div class="tier-col-badge">Tier 03 · Most Popular</div>
+            <div class="tier-col-name">Jade</div>
+            <div class="tier-col-pts">4,000 – 9,999 pts</div>
+            <ul class="tier-perks-list">
+              <li class="tier-perk">1.5x points on everything</li>
+              <li class="tier-perk">Monthly free drink credit</li>
+              <li class="tier-perk">Priority table reservation</li>
+              <li class="tier-perk">Barista workshop invite</li>
+              <li class="tier-perk">Behind-bar cupping access</li>
+            </ul>
+          </div>
+          <div class="tier-col" style="display:none; /* 4th tier — shows on wider screens */">
+            <div class="tier-col-badge">Tier 04</div>
+            <div class="tier-col-name">Ceremonial</div>
+            <div class="tier-col-pts">10,000+ pts</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding: 80px 32px; text-align:center;">
+        <div class="section-label" style="justify-content:center;">Get Started</div>
+        <div class="section-title" style="margin-bottom:24px;">Join the<br /><em>House Card</em></div>
+        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+          <button class="btn-ink">App Store ↗</button>
+          <button class="btn-outline">Google Play ↗</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEVELOPER CTA -->
+    <section class="dev-cta-section">
+      <div class="dev-cta-container">
+        <div class="dev-cta-text">
+          <span class="dev-cta-label">Crafted with intention</span>
+          <h2 class="dev-cta-title">Built by<br /><em>Sushant Raj Mishra</em></h2>
+          <p class="dev-cta-desc">Merging Japanese minimalism with brutalist functionalism. Crafting digital experiences
+            that stand the test of time.</p>
+          <a href="https://sushantrm.com.np/" target="_blank" class="dev-cta-btn">
+            Contact the developer ↗
+          </a>
+        </div>
+        <div class="dev-cta-visual">
+          <div class="mega-toggle-wrap">
+            <div class="mega-toggle-label">Switch System</div>
+            <button class="mega-toggle" onclick="toggleTheme()" aria-label="Theme toggle">
+              <div class="mega-toggle-thumb">
+                <span class="mt-icon mt-sun">☀</span>
+                <span class="mt-icon mt-moon">◐</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-top">
+        <div class="footer-col">
+          <div class="footer-logo">Matcha House</div>
+          <div class="footer-tagline">Slow coffee. Good life.</div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Pages</div>
+          <ul class="footer-links">
+            <li><a href="#" onclick="nav('home')">Home</a></li>
+            <li><a href="#" onclick="nav('menu')">Menu</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Visit</div>
+          <ul class="footer-links">
+            <li><a href="#">Thamel, KTM</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Contact</div>
+          <ul class="footer-links">
+            <li><a href="#">hi@matchahouse.np</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2025 Matcha House.</div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ════════════ VISIT ════════════ -->
+  <div class="page" id="page-visit">
+    <div class="visit-header">
+      <div class="section-label">Find Us</div>
+      <div class="section-title">Come<br /><em>in.</em></div>
+      <p style="font-size:0.9rem; color:var(--text-soft); margin-top:16px; max-width:500px; line-height:1.7;">We're in
+        the heart of Thamel. Walk-ins always welcome. Reservations guarantee your table.</p>
+    </div>
+    <div class="visit-grid">
+      <div class="visit-info">
+        <div class="info-row">
+          <div class="info-key">Address</div>
+          <div class="info-val"><strong>Matcha House</strong><br />Thamel Marg, Thamel<br />Kathmandu, 44600<br /><span
+              style="color:var(--olive); font-size:0.8rem; font-weight:700; cursor:pointer;">↗ Open in Maps</span></div>
+        </div>
+        <div class="info-row">
+          <div class="info-key">Hours</div>
+          <div class="info-val">Mon – Fri: <strong>7:00 – 21:00</strong><br />Saturday: <strong>7:00 –
+              22:00</strong><br />Sunday: <strong>8:00 – 20:00</strong></div>
+        </div>
+        <div class="info-row">
+          <div class="info-key">Phone</div>
+          <div class="info-val">+977 1 4800000</div>
+        </div>
+        <div class="info-row">
+          <div class="info-key">Email</div>
+          <div class="info-val">hi@matchahouse.np</div>
+        </div>
+        <div class="info-row">
+          <div class="info-key">Wi-Fi</div>
+          <div class="info-val">Available · 350 Mbps<br />Password at counter</div>
+        </div>
+        <div
+          style="margin-top: 32px; background: var(--sage-pale); border: 1px solid var(--border); height: 240px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;">
+          <span style="font-size:2rem;">📍</span>
+          <span
+            style="font-size:0.8rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:var(--text);">Thamel,
+            Kathmandu</span>
+          <button class="btn-outline" style="margin-top:8px; font-size:0.7rem; padding: 10px 20px;">Get Directions
+            ↗</button>
+        </div>
+      </div>
+      <div class="visit-form">
+        <div class="form-title">Get in touch</div>
+        <div class="form-sub">Questions, feedback, wholesale, events — drop us a line.</div>
+        <div class="form-row-2">
+          <div class="form-field"><label class="form-label">First Name</label><input class="form-input"
+              placeholder="Yuki" type="text" /></div>
+          <div class="form-field"><label class="form-label">Last Name</label><input class="form-input"
+              placeholder="Tamang" type="text" /></div>
+        </div>
+        <div class="form-field"><label class="form-label">Email</label><input class="form-input"
+            placeholder="hi@you.com" type="email" /></div>
+        <div class="form-field"><label class="form-label">Subject</label>
+          <select class="form-select">
+            <option>General Enquiry</option>
+            <option>Reservation</option>
+            <option>Wholesale Coffee</option>
+            <option>Event Booking</option>
+            <option>Press &amp; Media</option>
+            <option>Careers</option>
+            <option>Feedback</option>
+          </select>
+        </div>
+        <div class="form-field"><label class="form-label">Message</label><textarea class="form-textarea"
+            placeholder="What's on your mind?"></textarea></div>
+        <button class="btn-ink" style="width:100%; justify-content:center;" onclick="showToast('✦ Message sent!')">Send
+          Message ↗</button>
+      </div>
+    </div>
+    <div style="height:80px;"></div>
+    <!-- DEVELOPER CTA -->
+    <section class="dev-cta-section">
+      <div class="dev-cta-container">
+        <div class="dev-cta-text">
+          <span class="dev-cta-label">Crafted with intention</span>
+          <h2 class="dev-cta-title">Built by<br /><em>Sushant Raj Mishra</em></h2>
+          <p class="dev-cta-desc">Merging Japanese minimalism with brutalist functionalism. Crafting digital experiences
+            that stand the test of time.</p>
+          <a href="https://sushantrm.com.np/" target="_blank" class="dev-cta-btn">
+            Contact the developer ↗
+          </a>
+        </div>
+        <div class="dev-cta-visual">
+          <div class="mega-toggle-wrap">
+            <div class="mega-toggle-label">Switch System</div>
+            <button class="mega-toggle" onclick="toggleTheme()" aria-label="Theme toggle">
+              <div class="mega-toggle-thumb">
+                <span class="mt-icon mt-sun">☀</span>
+                <span class="mt-icon mt-moon">◐</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-top">
+        <div class="footer-col">
+          <div class="footer-logo">Matcha House</div>
+          <div class="footer-tagline">Slow coffee. Good life.</div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Pages</div>
+          <ul class="footer-links">
+            <li><a href="#" onclick="nav('home')">Home</a></li>
+            <li><a href="#" onclick="nav('menu')">Menu</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Hours</div>
+          <ul class="footer-links">
+            <li><a href="#">Mon–Fri: 7–9pm</a></li>
+            <li><a href="#">Sat: 7–10pm</a></li>
+            <li><a href="#">Sun: 8–8pm</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Contact</div>
+          <ul class="footer-links">
+            <li><a href="#">hi@matchahouse.np</a></li>
+            <li><a href="#">+977 1 4800000</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2025 Matcha House.</div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ════════════ RESERVE ════════════ -->
+  <div class="page" id="page-reserve">
+    <div class="reserve-wrapper">
+      <div class="section-label">Table Booking</div>
+      <div class="reserve-title">Reserve<br />a <em>Table</em></div>
+      <div class="reserve-subtitle">We'll hold it for you. Just tell us when.</div>
+
+      <div class="r-step-nav">
+        <div class="r-step-btn active" id="rsb1">
+          <div class="r-step-num">1</div>Date & Time
+        </div>
+        <div class="r-step-btn" id="rsb2">
+          <div class="r-step-num">2</div>Party Size
+        </div>
+        <div class="r-step-btn" id="rsb3">
+          <div class="r-step-num">3</div>Your Info
+        </div>
+        <div class="r-step-btn" id="rsb4">
+          <div class="r-step-num">4</div>Confirm
+        </div>
+      </div>
+
+      <!-- Step 1 -->
+      <div id="rs1">
+        <div class="r-section-head">Choose a Date</div>
+        <div class="cal-grid" id="calDays">
+          <div class="cal-day-name">Su</div>
+          <div class="cal-day-name">Mo</div>
+          <div class="cal-day-name">Tu</div>
+          <div class="cal-day-name">We</div>
+          <div class="cal-day-name">Th</div>
+          <div class="cal-day-name">Fr</div>
+          <div class="cal-day-name">Sa</div>
+        </div>
+        <div class="r-section-head">Choose a Time</div>
+        <div class="time-wrap">
+          <button class="t-btn" onclick="pickTime(this)">7:00 AM</button>
+          <button class="t-btn" onclick="pickTime(this)">8:00 AM</button>
+          <button class="t-btn" onclick="pickTime(this)">9:00 AM</button>
+          <button class="t-btn" onclick="pickTime(this)">10:00 AM</button>
+          <button class="t-btn" onclick="pickTime(this)">11:00 AM</button>
+          <button class="t-btn" onclick="pickTime(this)">12:00 PM</button>
+          <button class="t-btn" onclick="pickTime(this)">2:00 PM</button>
+          <button class="t-btn" onclick="pickTime(this)">3:00 PM</button>
+          <button class="t-btn" onclick="pickTime(this)">4:00 PM</button>
+          <button class="t-btn" onclick="pickTime(this)">5:00 PM</button>
+          <button class="t-btn" onclick="pickTime(this)">6:00 PM</button>
+          <button class="t-btn" onclick="pickTime(this)">7:00 PM</button>
+        </div>
+        <div class="r-nav-row">
+          <button class="btn-ink" style="width:100%; justify-content:center;" onclick="goRS(2)">Next: Party Size
+            ↗</button>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div id="rs2" style="display:none;">
+        <div class="r-section-head">How many guests?</div>
+        <div class="party-row">
+          <button class="p-btn" onclick="rParty(-1)">−</button>
+          <div class="p-num" id="rPartyNum">2</div>
+          <button class="p-btn" onclick="rParty(1)">+</button>
+          <span class="p-label">Guests<br />(max 12)</span>
+        </div>
+        <div class="r-section-head" style="margin-top:40px;">Any special requests?</div>
+        <textarea class="form-textarea" id="rNotes" placeholder="Occasion, dietary needs, seating preference..."
+          style="margin-bottom:0;"></textarea>
+        <div class="r-nav-row">
+          <button class="btn-outline" onclick="goRS(1)">← Back</button>
+          <button class="btn-ink" style="flex:1; justify-content:center;" onclick="goRS(3)">Next: Your Info ↗</button>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div id="rs3" style="display:none;">
+        <div class="r-section-head">Your Details</div>
+        <div class="form-row-2">
+          <div class="form-field"><label class="form-label">First Name</label><input class="form-input" id="rFname"
+              placeholder="Yuki" type="text" /></div>
+          <div class="form-field"><label class="form-label">Last Name</label><input class="form-input" id="rLname"
+              placeholder="Tamang" type="text" /></div>
+        </div>
+        <div class="form-field"><label class="form-label">Phone</label><input class="form-input" id="rPhone"
+            placeholder="+977 98..." type="tel" /></div>
+        <div class="form-field"><label class="form-label">Email</label><input class="form-input" id="rEmail"
+            placeholder="hi@you.com" type="email" /></div>
+        <div class="r-nav-row">
+          <button class="btn-outline" onclick="goRS(2)">← Back</button>
+          <button class="btn-ink" style="flex:1; justify-content:center;" onclick="goRS(4)">Confirm Booking ✓</button>
+        </div>
+      </div>
+
+      <!-- Step 4 Confirm -->
+      <div id="rs4" style="display:none;">
+        <div class="confirm-box">
+          <div class="confirm-icon">✦</div>
+          <div class="confirm-title">You're confirmed.</div>
+          <div class="confirm-sub">We'll see you soon. Check your email for your booking reference.</div>
+          <div class="confirm-details" id="rConfirmDetails"></div>
+          <button class="btn-ink" onclick="nav('home')">Back to Home ↗</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEVELOPER CTA -->
+    <section class="dev-cta-section">
+      <div class="dev-cta-container">
+        <div class="dev-cta-text">
+          <span class="dev-cta-label">Crafted with intention</span>
+          <h2 class="dev-cta-title">Built by<br /><em>Sushant Raj Mishra</em></h2>
+          <p class="dev-cta-desc">Merging Japanese minimalism with brutalist functionalism. Crafting digital experiences
+            that stand the test of time.</p>
+          <a href="https://sushantrm.com.np/" target="_blank" class="dev-cta-btn">
+            Contact the developer ↗
+          </a>
+        </div>
+        <div class="dev-cta-visual">
+          <div class="mega-toggle-wrap">
+            <div class="mega-toggle-label">Switch System</div>
+            <button class="mega-toggle" onclick="toggleTheme()" aria-label="Theme toggle">
+              <div class="mega-toggle-thumb">
+                <span class="mt-icon mt-sun">☀</span>
+                <span class="mt-icon mt-moon">◐</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-top">
+        <div class="footer-col">
+          <div class="footer-logo">Matcha House</div>
+          <div class="footer-tagline">Slow coffee. Good life.</div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Pages</div>
+          <ul class="footer-links">
+            <li><a href="#" onclick="nav('home')">Home</a></li>
+            <li><a href="#" onclick="nav('menu')">Menu</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Visit</div>
+          <ul class="footer-links">
+            <li><a href="#">Thamel, KTM</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Contact</div>
+          <ul class="footer-links">
+            <li><a href="#">hi@matchahouse.np</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2025 Matcha House.</div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- MEGA CART OVERLAY -->
+  <div class="cart-overlay" id="cartOverlay">
+    <div class="cart-panel" id="cartPanel">
+      <!-- Step 1: List -->
+      <div class="cart-step active" id="cs1">
+        <div class="cart-header">
+          <h2>Your Cart</h2>
+          <button class="cart-close" onclick="closeCart()">✕</button>
+        </div>
+        <div class="cart-items" id="cartItemsList">
+          <!-- Sample empty state -->
+          <div class="cart-empty">
+            <div class="ce-icon">🍵</div>
+            <p>Your cart is empty.<br/>Add some craft matcha or coffee to start.</p>
+          </div>
+        </div>
+        <div class="cart-footer">
+          <div class="cart-total-row">
+            <span class="ct-label">Estimated Total</span>
+            <span class="ct-val" id="cartTotalSum">Rs. 0</span>
+          </div>
+          <button class="btn-ink" style="width:100%; justify-content:center;" onclick="goCS(2)">Proceed to Checkout ↗</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Info (Booking Stuff) -->
+      <div class="cart-step" id="cs2">
+        <div class="cart-header">
+          <button class="cart-close" onclick="goCS(1)">←</button>
+          <h2>Order Info</h2>
+          <button class="cart-close" onclick="closeCart()">✕</button>
+        </div>
+        <div class="cart-items" style="padding-top: 20px;">
+          <div class="form-field"><label class="form-label">Full Name</label><input class="form-input" id="oName" placeholder="Sushant Raj Mishra" type="text" /></div>
+          <div class="form-field"><label class="form-label">Phone Number</label><input class="form-input" id="oPhone" placeholder="+977 98..." type="tel" /></div>
+          <div class="form-field"><label class="form-label">Delivery Type</label>
+            <select class="form-select" id="oType">
+              <option value="dine">Dine-in (Table Booking)</option>
+              <option value="takeaway">Takeaway</option>
+              <option value="delivery">Delivery (Thamel Area)</option>
+            </select>
+          </div>
+          <div class="form-field"><label class="form-label">Notes / Table #</label><textarea class="form-textarea" id="oNotes" placeholder="Special requests..."></textarea></div>
+        </div>
+        <div class="cart-footer">
+          <button class="btn-ink" style="width:100%; justify-content:center;" onclick="placeOrder()">Place Order ✓</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Success -->
+      <div class="cart-step" id="cs3">
+        <div class="order-success">
+          <div class="os-icon">✦</div>
+          <h2 class="os-title">Ordered successfully.</h2>
+          <p class="os-desc">Your craft experience is being prepared with intention. We'll notify you shortly.</p>
+          <button class="btn-outline" onclick="closeCart(); nav('home')">Back to Home ↗</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CART PILL -->
+  <div class="cart-pill" id="cartPill">
+    <span>Cart</span>
+    <div class="cart-bubble" id="cCount">0</div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <span id="toastTxt">Added</span>
+  </div>
+
+  <script>
+    // ── CURSOR ──
+    const cur = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    document.addEventListener('mousemove', e => {
+      cur.style.left = e.clientX + 'px';
+      cur.style.top = e.clientY + 'px';
+      setTimeout(() => {
+        ring.style.left = e.clientX + 'px';
+        ring.style.top = e.clientY + 'px';
+      }, 80);
+    });
+    document.querySelectorAll('a, button, .drink-cell, .feat-card, .menu-row, .team-card, .gm-item').forEach(el => {
+      el.addEventListener('mouseenter', () => { cur.style.width = '20px'; cur.style.height = '20px'; });
+      el.addEventListener('mouseleave', () => { cur.style.width = '10px'; cur.style.height = '10px'; });
+    });
+
+    // ── NAVIGATION ──
+    function nav(page) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+      document.getElementById('page-' + page).classList.add('active');
+      const el = document.getElementById('nl-' + page);
+      if (el) el.classList.add('active');
+      window.scrollTo(0, 0);
+      return false;
+    }
+
+    // ── THEME ──
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.dataset.theme === 'dark';
+      const newTheme = isDark ? 'light' : 'dark';
+      html.dataset.theme = newTheme;
+      localStorage.setItem('matcha_theme', newTheme);
+
+      const icon = document.getElementById('themeIcon');
+      const label = document.getElementById('themeLabel');
+      if (icon) icon.textContent = newTheme === 'dark' ? '◐' : '☀';
+      if (label) label.textContent = newTheme === 'dark' ? 'Dark' : 'Light';
+
+      showToast('✦ ' + newTheme.toUpperCase() + ' SYSTEM ACTIVE');
+    }
+
+    // Init theme
+    (function init() {
+      const saved = localStorage.getItem('matcha_theme');
+      if (saved) {
+        document.documentElement.dataset.theme = saved;
+        const icon = document.getElementById('themeIcon');
+        const label = document.getElementById('themeLabel');
+        if (icon) icon.textContent = saved === 'dark' ? '◐' : '☀';
+        if (label) label.textContent = saved === 'dark' ? 'Dark' : 'Light';
+      }
+    })();
+
+    // ── MOBILE NAV ──
+    function toggleMob() {
+      const mob = document.getElementById('mobileNav');
+      const btn = document.getElementById('burger');
+      mob.classList.toggle('open');
+      btn.classList.toggle('open');
+    }
+
+    // ── MENU FILTER ──
+    function filterMenu(btn, cat) {
+      document.querySelectorAll('.mf-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.menu-category').forEach(c => {
+        c.style.display = (cat === 'all' || c.dataset.cat === cat) ? 'block' : 'none';
+      });
+    }
+    function toggleCat(header) {
+      const body = header.nextElementSibling;
+      const tog = header.querySelector('.cat-toggle');
+      body.classList.toggle('open');
+      tog.textContent = body.classList.contains('open') ? '−' : '+';
+    }
+
+    // ── CART SYSTEM ──
+    let cart = [];
+    
+    function addCart(item, price) {
+      cart.push({ id: Date.now(), name: item, price: price });
+      updateCartUI();
+      showToast('✦ ' + item + ' added');
+    }
+
+    function removeCart(id) {
+      cart = cart.filter(i => i.id !== id);
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const pill = document.getElementById('cartPill');
+      const count = document.getElementById('cCount');
+      const list = document.getElementById('cartItemsList');
+      const total = document.getElementById('cartTotalSum');
+      
+      count.textContent = cart.length;
+      if (cart.length > 0) pill.classList.add('visible');
+      else pill.classList.remove('visible');
+
+      if (cart.length === 0) {
+        list.innerHTML = `<div class="cart-empty"><div class="ce-icon">🍵</div><p>Your cart is empty.<br/>Add some craft matcha or coffee to start.</p></div>`;
+        total.textContent = 'Rs. 0';
+        return;
+      }
+
+      let sum = 0;
+      list.innerHTML = cart.map(item => {
+        sum += item.price;
+        return `
+          <div class="cart-item">
+            <div class="ci-info">
+              <div class="ci-name">${item.name}</div>
+              <div class="ci-price">Rs. ${item.price}</div>
+            </div>
+            <button class="ci-remove" onclick="removeCart(${item.id})">✕</button>
+          </div>
+        `;
+      }).join('');
+      total.textContent = 'Rs. ' + sum;
+    }
+
+    function openCart() {
+      document.getElementById('cartOverlay').classList.add('open');
+      goCS(1);
+    }
+
+    function closeCart() {
+      document.getElementById('cartOverlay').classList.remove('open');
+    }
+
+    function goCS(step) {
+      document.querySelectorAll('.cart-step').forEach((s, i) => {
+        s.classList.toggle('active', (i + 1) === step);
+      });
+    }
+
+    function placeOrder() {
+      if (cart.length === 0) return showToast('✦ Cart is empty');
+      const name = document.getElementById('oName').value;
+      if (!name) return showToast('✦ Please enter your name');
+      
+      // Reset cart
+      cart = [];
+      updateCartUI();
+      goCS(3);
+      showToast('✦ Order Placed!');
+    }
+
+    document.getElementById('cartPill').onclick = openCart;
+
+    // ── TOAST ──
+    let tt;
+    function showToast(msg) {
+      clearTimeout(tt);
+      const t = document.getElementById('toast');
+      document.getElementById('toastTxt').textContent = msg;
+      t.classList.add('show');
+      tt = setTimeout(() => t.classList.remove('show'), 2800);
+    }
+
+    // ── RESERVATION CALENDAR ──
+    let rDate = null, rTime = null, rPartySize = 2;
+    const dn = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+    const mn = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    function buildCal() {
+      const grid = document.getElementById('calDays');
+      const today = new Date();
+      // Clear existing date buttons (keep day name headers)
+      const existing = grid.querySelectorAll('.cal-btn');
+      existing.forEach(e => e.remove());
+
+      // Add padding for first day of current month
+      const firstDay = new Date(today.getFullYear(), today.getMonth(), 1).getDay();
+
+      for (let i = 0; i < 14; i++) {
+        const d = new Date(today);
+        d.setDate(today.getDate() + i);
+        const btn = document.createElement('button');
+        btn.className = 'cal-btn';
+        btn.innerHTML = `<span class="cn">${d.getDate()}</span><span class="cd">${mn[d.getMonth()]}</span>`;
+        btn.onclick = function () {
+          document.querySelectorAll('.cal-btn').forEach(b => b.classList.remove('selected'));
+          this.classList.add('selected');
+          rDate = `${dn[d.getDay()]} ${d.getDate()} ${mn[d.getMonth()]}`;
+        };
+        if (i === 0) setTimeout(() => btn.click(), 50);
+        grid.appendChild(btn);
+      }
+    }
+
+    function pickTime(btn) {
+      document.querySelectorAll('.t-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      rTime = btn.textContent;
+    }
+
+    function rParty(d) {
+      rPartySize = Math.max(1, Math.min(12, rPartySize + d));
+      document.getElementById('rPartyNum').textContent = rPartySize;
+    }
+
+    function goRS(step) {
+      [1, 2, 3, 4].forEach(n => {
+        document.getElementById('rs' + n).style.display = n === step ? 'block' : 'none';
+        const sb = document.getElementById('rsb' + n);
+        sb.classList.remove('active', 'done');
+        if (n < step) sb.classList.add('done');
+        if (n === step) sb.classList.add('active');
+      });
+      if (step === 4) {
+        const fn = document.getElementById('rFname').value || 'Guest';
+        const ln = document.getElementById('rLname').value || '';
+        document.getElementById('rConfirmDetails').innerHTML = `
+      <div class="confirm-detail-item"><div class="cdl">Date</div><div class="cdv">${rDate || 'Today'}</div></div>
+      <div class="confirm-detail-item"><div class="cdl">Time</div><div class="cdv">${rTime || '12:00 PM'}</div></div>
+      <div class="confirm-detail-item"><div class="cdl">Guests</div><div class="cdv">${rPartySize}</div></div>
+      <div class="confirm-detail-item"><div class="cdl">Name</div><div class="cdv">${fn} ${ln}</div></div>
+    `;
+        showToast('✦ Reservation confirmed!');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    buildCal();
+  </script>
+</body>
+
+</html>
